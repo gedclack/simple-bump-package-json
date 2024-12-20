@@ -1,4 +1,4 @@
-name: "Increment package.json Version"
+name: "Simple bump package.json Version"
 description: "Automatically increment the version number in package.json based on specified inputs"
 branding:
   icon: "arrow-up-circle"

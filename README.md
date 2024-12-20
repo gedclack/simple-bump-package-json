@@ -26,12 +26,26 @@ When the version number is bumped, the following reset logic is applied:
 To use this action, create a workflow file (e.g., `.github/workflows/bump-version.yml`) in your repository:
 
 ```yaml
+# On demand workflow style
+
 name: Bump Version
+run-name: Bump "${{ inputs.bump-type }}" version
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      bump-type:
+        type: choice
+        description: "Bump type"
+        required: true
+        default: "patch"
+        options:
+          - major
+          - minor
+          - patch
+
+permissions:
+  contents: write
 
 jobs:
   bump-version:
@@ -44,7 +58,7 @@ jobs:
         uses: gedclack/simple-bump-package-json@v1
         id: bump-version
         with:
-          bump-type: patch # options: major, minor, patch
+          bump-type: ${{ github.event.inputs.bump-type }}
 
       - name: Commit & push changes
         run: |

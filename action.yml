@@ -1,0 +1,18 @@
+name: "Increment package.json Version"
+description: "Automatically increment the version number in package.json based on specified inputs"
+branding:
+  icon: "arrow-up-circle"
+  color: "white"
+
+inputs:
+  bump-mode:
+    description: "Specify which part of the version to increment: 'major', 'minor', or 'patch'"
+    default: "patch"
+
+outputs:
+  new-version:
+    description: "The updated version number"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"

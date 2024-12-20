@@ -1,0 +1,32 @@
+{
+  "name": "simple-bump-package-json",
+  "version": "1.0.0",
+  "description": "Simple and straightforward version bump for package.json",
+  "author": "GedClack",
+  "keywords": [
+    "GitHub",
+    "Actions",
+    "Bump Version",
+    "package.json"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "npx jest",
+    "coverage": "npx make-coverage-badge --output-path ./badges/coverage.svg",
+    "package": "npx ncc build src/index.js -o dist --source-map --license licenses.txt",
+    "all": "npm run test && npm run coverage && npm run package"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "semver": "^7.6.3"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.3",
+    "jest": "^29.7.0",
+    "make-coverage-badge": "^1.2.0",
+    "prettier": "^3.4.2"
+  }
+}

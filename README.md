@@ -1,0 +1,1 @@
+# simple-bump-package-json

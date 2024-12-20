@@ -29,14 +29,14 @@ To use this action, create a workflow file (e.g., `.github/workflows/bump-versio
 # On demand workflow style
 
 name: Bump Version
-run-name: Bump "${{ inputs.bump-type }}" version
+run-name: Bump "${{ inputs.bump-mode }}" version
 
 on:
   workflow_dispatch:
     inputs:
-      bump-type:
+      bump-mode:
         type: choice
-        description: "Bump type"
+        description: "Bump mode"
         required: true
         default: "patch"
         options:
@@ -55,10 +55,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Bump version
-        uses: gedclack/simple-bump-package-json@v1
+        uses: gedclack/simple-bump-package-json@v1.0.0
         id: bump-version
         with:
-          bump-type: ${{ github.event.inputs.bump-type }}
+          bump-mode: ${{ github.event.inputs.bump-mode }}
 
       - name: Commit & push changes
         run: |
@@ -70,7 +70,7 @@ jobs:
 
 ## Inputs
 
-- `bump-type`: The type of version bump to perform (`major`, `minor`, `patch`). Default is `patch`.
+- `bump-mode`: The mode of version bump to perform (`major`, `minor`, `patch`). Default is `patch`.
 
 ## Outputs
 

@@ -20,9 +20,7 @@ describe("run", () => {
 
     await run();
 
-    expect(setFailedSpy).toHaveBeenCalledWith(
-      "Invalid bump mode: invalid-bump-mode"
-    );
+    expect(setFailedSpy).toHaveBeenCalledWith("Invalid bump mode: invalid-bump-mode");
   });
 
   test("should fail if package.json file is not found", async () => {
@@ -41,9 +39,7 @@ describe("run", () => {
 
     await run();
 
-    expect(setFailedSpy).toHaveBeenCalledWith(
-      expect.stringContaining("Error parsing package.json")
-    );
+    expect(setFailedSpy).toHaveBeenCalledWith(expect.stringContaining("Error parsing package.json"));
   });
 
   test("should fail if version field is missing in package.json", async () => {
@@ -53,23 +49,17 @@ describe("run", () => {
 
     await run();
 
-    expect(setFailedSpy).toHaveBeenCalledWith(
-      "No version field found in package.json"
-    );
+    expect(setFailedSpy).toHaveBeenCalledWith("No version field found in package.json");
   });
 
   test("should fail if current version is invalid", async () => {
     getInputSpy.mockReturnValue("patch");
     existsSyncSpy.mockReturnValue(true);
-    readFileSyncSpy.mockReturnValue(
-      JSON.stringify({ version: "invalid-version" })
-    );
+    readFileSyncSpy.mockReturnValue(JSON.stringify({ version: "invalid-version" }));
 
     await run();
 
-    expect(setFailedSpy).toHaveBeenCalledWith(
-      "Invalid version in package.json: invalid-version"
-    );
+    expect(setFailedSpy).toHaveBeenCalledWith("Invalid version in package.json: invalid-version");
   });
 
   test("should update version and set output", async () => {
@@ -80,13 +70,8 @@ describe("run", () => {
 
     await run();
 
-    expect(writeFileSyncSpy).toHaveBeenCalledWith(
-      "package.json",
-      JSON.stringify({ version: "1.0.1" }, null, 2)
-    );
-    expect(infoSpy).toHaveBeenCalledWith(
-      "Updated package.json version to: 1.0.1"
-    );
+    expect(writeFileSyncSpy).toHaveBeenCalledWith("package.json", JSON.stringify({ version: "1.0.1" }, null, 2) + "\n");
+    expect(infoSpy).toHaveBeenCalledWith("Updated package.json version to: 1.0.1");
     expect(setOutputSpy).toHaveBeenCalledWith("new-version", "1.0.1");
   });
 
@@ -98,13 +83,8 @@ describe("run", () => {
 
     await run();
 
-    expect(writeFileSyncSpy).toHaveBeenCalledWith(
-      "package.json",
-      JSON.stringify({ version: "2.0.0" }, null, 2)
-    );
-    expect(infoSpy).toHaveBeenCalledWith(
-      "Updated package.json version to: 2.0.0"
-    );
+    expect(writeFileSyncSpy).toHaveBeenCalledWith("package.json", JSON.stringify({ version: "2.0.0" }, null, 2) + "\n");
+    expect(infoSpy).toHaveBeenCalledWith("Updated package.json version to: 2.0.0");
     expect(setOutputSpy).toHaveBeenCalledWith("new-version", "2.0.0");
   });
 
@@ -116,13 +96,8 @@ describe("run", () => {
 
     await run();
 
-    expect(writeFileSyncSpy).toHaveBeenCalledWith(
-      "package.json",
-      JSON.stringify({ version: "1.3.0" }, null, 2)
-    );
-    expect(infoSpy).toHaveBeenCalledWith(
-      "Updated package.json version to: 1.3.0"
-    );
+    expect(writeFileSyncSpy).toHaveBeenCalledWith("package.json", JSON.stringify({ version: "1.3.0" }, null, 2) + "\n");
+    expect(infoSpy).toHaveBeenCalledWith("Updated package.json version to: 1.3.0");
     expect(setOutputSpy).toHaveBeenCalledWith("new-version", "1.3.0");
   });
 });

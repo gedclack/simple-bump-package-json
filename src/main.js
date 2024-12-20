@@ -45,7 +45,7 @@ async function run() {
 
     packageData.version = newVersion;
 
-    fs.writeFileSync(packageJsonPath, JSON.stringify(packageData, null, 2));
+    fs.writeFileSync(packageJsonPath, JSON.stringify(packageData, null, 2) + "\n");
     core.info(`Updated package.json version to: ${newVersion}`);
 
     core.setOutput("new-version", newVersion);
